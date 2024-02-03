@@ -32,12 +32,12 @@ export const PRODUCT_CATEGORIES = [
             {
                 name: "New Arrivals",
                 href: "#",
-                iamgeSrc: "/nav/ui-kits/new.jpg"
+                iamgeSrc: "/nav/icons/new.jpg"
             },
             {
                 name: "Best selling icons",
                 href: "#",
-                iamgeSrc: "/nav/ui-kits/bestsellers.jpg"
+                iamgeSrc: "/nav/icons/bestsellers.jpg"
             }
         ]
     }
