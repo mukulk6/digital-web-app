@@ -1,5 +1,5 @@
 "use client"
-import { PRODUCT_CATEGORIES } from "@/app/config"
+import { PRODUCT_CATEGORIES } from "@/src/config/index"
 import { KeyboardEvent, useEffect, useRef, useState } from "react";
 import NavItem from "./NavItem";
 import { useOnClickOutside } from "../hooks/use-onclick-outside";
@@ -21,7 +21,7 @@ const NavItems = () => {
         }
         document.addEventListener('keydown', handler)
         return ()=>{
-            document.removeEventListener("keydown",(e)=> handler(e))
+            document.removeEventListener("keydown", handler)
         }
      },[])
     return(

@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import MaxWidthWrapper from '../components/MaxWidthWrapper'
+import MaxWidthWrapper from '@/src/components/MaxWidthWrapper'
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/button'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/src/components/ui/button'
+import { Button } from '@/src/components/ui/button'
 import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react'
 
 
