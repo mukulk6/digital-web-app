@@ -5,6 +5,7 @@ import { ShoppingCartIcon } from "lucide-react";
 import { formatPrice } from "../lib/utils";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const Cart = () => {
     const itemCount = 0;
@@ -59,9 +60,17 @@ const Cart = () => {
                 </div>
                 </>
             ):(<div className="flex h-full flex-col items-center justify-center space-y-1">
-                <div className="relative mb-4 h-60 w-60 text">
-                
+                <div className="relative mb-4 h-60 w-60 text-muted-foreground">
+                <Image src = '/hippo-empty-cart.png' fill alt="Empty shopping cart"/>
                 </div>
+                <div className="text-xl font-semibold">Your cart is empty</div>
+                <SheetTrigger asChild>
+                    <Link href='/products' className={buttonVariants({
+                        variant:'link',
+                        size:'sm',
+                        className:'text-sm text-muted-foreground'
+                    })}>Add Items to your cart to checkout</Link>
+                </SheetTrigger>
             </div>)}
         </SheetContent>   
      </Sheet>   
