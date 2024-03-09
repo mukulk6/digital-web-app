@@ -1,4 +1,4 @@
-import { publicProcedure } from "./trpc";
+import { publicProcedure,router } from "./trpc";
 
 export const appRouter  =router({
     anyApiRoute:publicProcedure.query(()=>{
@@ -6,4 +6,4 @@ export const appRouter  =router({
     })
 })
 
-export type AppRouter
+export type AppRouter = typeof appRouter;
