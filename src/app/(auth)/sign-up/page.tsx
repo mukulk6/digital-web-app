@@ -16,7 +16,7 @@ const Page = () => {
 
     const {register,handleSubmit,formState:{errors}} = useForm<TAuthCrediantialsValidator>({resolver:zodResolver(AuthCrediantialsValidator)})
 
-    const {data} = trpc.anyApiRoute.useQuery()
+    const {data} = trpc.useQuery()
     console.log(data)
     
 
