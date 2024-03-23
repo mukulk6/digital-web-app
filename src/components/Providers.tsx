@@ -9,7 +9,7 @@ export const Providers = ({children}:PropsWithChildren) => {
     const [trpcClient] = useState(()=>trpc.createClient({
         links:[
             httpBatchLink({
-                url:`${process.env.NEXT_PUBLIC_SERVER_URL}/api/trpc`
+                url:`${process.env.NEXT_PUBLIC_SERVER_URL}/api/trpc`,
                 fetch(url,options){
                     return fetch(url,{
                         ...options,

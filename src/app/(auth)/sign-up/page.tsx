@@ -9,12 +9,13 @@ import { cn } from "@/src/lib/utils";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
-import { AuthCrediantialsValidator, TAuthCrediantialsValidator } from "@/src/lib/validators/account-credentials-validators";}
+import { AuthCrediantialsValidator, TAuthCrediantialsValidator } from "@/src/lib/validators/account-credentials-validators";
 
 
 const Page = () => {
 
     const {register,handleSubmit,formState:{errors}} = useForm<TAuthCrediantialsValidator>({resolver:zodResolver(AuthCrediantialsValidator)})
+    
 
     const onSubmit = ({email,password}:TAuthCrediantialsValidator) =>{
 
