@@ -1,20 +1,23 @@
 "use client"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Icons } from "@/src/components/Icons";
 import { Button, buttonVariants } from "@/src/components/ui/button";
-import {  ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/src/lib/utils";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {z} from "zod";
 import { AuthCrediantialsValidator, TAuthCrediantialsValidator } from "@/src/lib/validators/account-credentials-validators";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import {trpc} from "../../../trpc/client"
 
 
 const Page = () => {
 
     const {register,handleSubmit,formState:{errors}} = useForm<TAuthCrediantialsValidator>({resolver:zodResolver(AuthCrediantialsValidator)})
+
+    const {data} = trpc.anyApiRoute.useQuery()
+    console.log(data)
     
 
     const onSubmit = ({email,password}:TAuthCrediantialsValidator) =>{
