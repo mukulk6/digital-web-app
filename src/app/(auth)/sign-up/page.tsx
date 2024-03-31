@@ -15,13 +15,13 @@ import {trpc} from "../../../trpc/client"
 const Page = () => {
 
     const {register,handleSubmit,formState:{errors}} = useForm<TAuthCrediantialsValidator>({resolver:zodResolver(AuthCrediantialsValidator)})
+    const {mutate,isLoading} = trpc.auth.createPayloadUser.useMutation({
 
-    const {data} = trpc.useQuery()
-    console.log(data)
+    })
     
 
     const onSubmit = ({email,password}:TAuthCrediantialsValidator) =>{
-
+        mutate({email,password})
     }
     return(
         <>
@@ -46,7 +46,7 @@ const Page = () => {
                         </div>
                         <div className="grid gap-1 py-2">
                             <Label htmlFor="password">Password</Label>
-                            <Input {...register('password')} placeholder="Password" className={cn({"focus-visible:ring-red-500":errors.password})}/>
+                            <Input type='password' {...register('password')} placeholder="Password" className={cn({"focus-visible:ring-red-500":errors.password})}/>
                         </div>
                         <Button>Sign Up</Button>
                     </div>
