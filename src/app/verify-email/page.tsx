@@ -1,4 +1,5 @@
 import Image from "next/image"
+import VerifyEmail from "@/src/components/VerifyEmail"
 interface PageProps {
     searchParams: {
         [key: string]: string | string[] | undefined
@@ -12,7 +13,7 @@ const VerifyEmailPage = ({ searchParams }: PageProps) => {
             {token && typeof (token) === "string" ?
                 (
                     <div className="grid gap-6">
-                        <VerifyEmail />
+                        <VerifyEmail token={token}/>
                     </div>
                 ) : (
                     <div className="flex flex-col space-between justify-center h-full items-center">
