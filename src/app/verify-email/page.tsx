@@ -11,7 +11,9 @@ const VerifyEmailPage = ({ searchParams }: PageProps) => {
         <div className="mx-auto flex w-full flex-col jutify-center space-y-6 sm:w-[350px]">
             {token && typeof (token) === "string" ?
                 (
-                    <div className="grid gap-6"></div>
+                    <div className="grid gap-6">
+                        <VerifyEmail />
+                    </div>
                 ) : (
                     <div className="flex flex-col space-between justify-center h-full items-center">
                         <div className="text-muted-foreground w-60 h-60 mb-4 relative">
