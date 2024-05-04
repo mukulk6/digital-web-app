@@ -9,14 +9,36 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import {trpc} from "../../../trpc/client"
+import {trpc} from "../../../trpc/client";
+import {toast} from"sonner";
+import { ZodError } from "zod";
+import { router } from "@/src/trpc/trpc";
+import { useRouter } from "next/router";
 
 
 const Page = () => {
+    const router = useRouter()
 
     const {register,handleSubmit,formState:{errors}} = useForm<TAuthCrediantialsValidator>({resolver:zodResolver(AuthCrediantialsValidator)})
     const {mutate,isLoading} = trpc.auth.createPayloadUser.useMutation({
+        onError:(err)=>{
+            if(err?.data?.code === 'CONFLICT')
+                {
+                  toast.error('This email is already in use') 
+                  return
+                }
+                if(err instanceof ZodError)
+                    {
+                       toast.error(err.issues[0].message) 
+                       return 
+                    }
 
+                toast.error('Something wrong. Please try again')
+        },
+        onSuccess:({sentToEmail})=>{
+            toast.success(`Verification mail sent tp ${sentToEmail}`)
+            router.push('/verify-email?to=' + sentToEmail)
+        }
     })
     
 

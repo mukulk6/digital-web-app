@@ -1,6 +1,6 @@
 "use client"
 
-import { XCircle } from "lucide-react"
+import { Loader2, XCircle } from "lucide-react"
 import { trpc } from "../trpc/client"
 import Image from "next/image"
 import { buttonVariants } from "./ui/button"
@@ -37,6 +37,14 @@ const VerifyEmail = ({token}:VerifyEmailProps) =>{
             </div>
         )
     }
+    if(isLoading)
+        {
+            return <div className="flex flex-col items-center gap-2">
+            <Loader2 className="animate-spin h-8 w-8 text-zinc-300" />
+            <h3 className="font-semibold text-xl">Verifying</h3>
+            <p className="text-muted-foreground text-sm">This won't take too long...</p>
+        </div>
+        }
 
 }
 

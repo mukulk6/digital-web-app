@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server"
 import { getPayloadClient } from "../get-payload"
 import { AuthCrediantialsValidator } from "../lib/validators/account-credentials-validators"
 import {router,publicProcedure} from "./trpc"
+import {z} from "zod"
 export const authRouter = router({
     createPayloadUser:publicProcedure.input(AuthCrediantialsValidator).mutation(async ({input})=>{
         const {email,password} = input
@@ -22,11 +23,11 @@ export const authRouter = router({
             data:{
              email,
              password,
-             role:"User"  
+             role:"user"  
             }
         })
         return {success:true,sentToEmail:email}
-    })
+    }),
     verifyEmail:publicProcedure.input(z.object({token:z.string()})).query(async({input})=>{
         const {token} = input
         const payload = await getPayloadClient()
