@@ -12,14 +12,15 @@ import { useForm } from "react-hook-form";
 import {trpc} from "../../../trpc/client";
 import {toast} from"sonner";
 import { ZodError } from "zod";
-import { router } from "@/src/trpc/trpc";
-import { useRouter } from "next/router";
+// import { router } from "@/src/trpc/trpc";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 const Page = () => {
-    const router = useRouter()
 
+    const searchParams = useSearchParams()
     const {register,handleSubmit,formState:{errors}} = useForm<TAuthCrediantialsValidator>({resolver:zodResolver(AuthCrediantialsValidator)})
+    const router = useRouter()
     const {mutate,isLoading} = trpc.auth.createPayloadUser.useMutation({
         onError:(err)=>{
             if(err?.data?.code === 'CONFLICT')
@@ -65,14 +66,24 @@ const Page = () => {
                         <div className="grid gap-1 py-2">
                             <Label htmlFor="email">Email</Label>
                             <Input {...register("email")} placeholder="you@axample.com" className={cn({"focus-visible:ring-red-500":errors.email})}/>
+                            {errors?.email && (<p className="text-sm text-red-500">{errors.email.message}</p>)}
                         </div>
                         <div className="grid gap-1 py-2">
                             <Label htmlFor="password">Password</Label>
                             <Input type='password' {...register('password')} placeholder="Password" className={cn({"focus-visible:ring-red-500":errors.password})}/>
+                            {errors?.password && (<p className="text-sm text-red-500">{errors.password.message}</p>)}
                         </div>
-                        <Button>Sign Up</Button>
+                        <Button>Sign In</Button>
                     </div>
                 </form>
+                <div className = "relative">
+                    <div aria-hidden='true' className = 'absolute inset-0 flex items-center'>
+                        <span className='w-full border-t'></span>
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                    <span className="px-2 text-muted-foreground bg-background">or</span>
+                    </div>
+                </div>
             </div>
             </div >
         </div>
