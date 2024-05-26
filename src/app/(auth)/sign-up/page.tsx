@@ -22,6 +22,12 @@ const Page = () => {
     const {register,handleSubmit,formState:{errors}} = useForm<TAuthCrediantialsValidator>({resolver:zodResolver(AuthCrediantialsValidator)})
     const router = useRouter()
     const isSeller = searchParams.get('as') === 'seller'
+    const continueAsSeller = ()=> {
+        router.push("?as=seller")
+    }
+    const continueAsBuyer = ()=>{
+        router.replace('/sign-in',undefined)
+    }
     const origin = searchParams.get('origin')
     const {mutate:signIn,isLoading} = trpc.auth.signIn.useMutation({
         onSuccess:() =>{
@@ -56,7 +62,7 @@ const Page = () => {
             <div className="flex flex-col items-center space-y-2 text-center">
             <Icons.logo className="h-20 w-20"></Icons.logo>
             <h1 className="text-2x1 font-bold">
-                Create an account
+                Sign in to your {isSeller ? "seller" : ''}
             </h1>
             <Link className={buttonVariants({variant:'link',className:"gap-1.5"})} href='/sign-in'>
                 Already have an account? Sign-in
@@ -87,6 +93,12 @@ const Page = () => {
                     <span className="px-2 text-muted-foreground bg-background">or</span>
                     </div>
                 </div>
+                {isSeller ? (
+                    <Button onClick={continueAsBuyer} variant={'secondary'} disabled={isLoading}>Continue as Customer</Button>) :
+                    <Button  onClick={continueAsSeller} variant={'secondary'} disabled={isLoading}>
+                    Continue
+                    </Button>
+                }
             </div>
             </div >
         </div>
